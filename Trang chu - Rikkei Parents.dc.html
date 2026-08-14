@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EDEDF0;font-family:'Be Vietnam Pro',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#C8102E;text-decoration:none}a:hover{color:#9B0E24}
+@keyframes shimmer{0%{opacity:.55}50%{opacity:1}100%{opacity:.55}}
+.sk{background:#F1F1F3;border-radius:6px;animation:shimmer 1.4s ease-in-out infinite}
+.scroll::-webkit-scrollbar{width:0}
+</style>
+</helmet>
+<div style="display:flex;flex-direction:column;align-items:center;gap:18px;padding:22px 24px 34px;min-height:100%;box-sizing:border-box">
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;width:392px">
+    <span style="font:600 11px 'Be Vietnam Pro',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#6B6B70;margin-right:4px">Trạng thái</span>
+    <button onClick="{{ setFull }}" style="font:500 12px 'Be Vietnam Pro',sans-serif;padding:6px 12px;border-radius:8px;border:1px solid #E5E5E8;background:#FFFFFF;color:#1A1A1E;cursor:pointer" style-hover="background:#FDEBEC;border-color:#C8102E;color:#C8102E">Đầy đủ</button>
+    <button onClick="{{ setEmpty }}" style="font:500 12px 'Be Vietnam Pro',sans-serif;padding:6px 12px;border-radius:8px;border:1px solid #E5E5E8;background:#FFFFFF;color:#1A1A1E;cursor:pointer" style-hover="background:#FDEBEC;border-color:#C8102E;color:#C8102E">Rỗng</button>
+    <button onClick="{{ setLoading }}" style="font:500 12px 'Be Vietnam Pro',sans-serif;padding:6px 12px;border-radius:8px;border:1px solid #E5E5E8;background:#FFFFFF;color:#1A1A1E;cursor:pointer" style-hover="background:#FDEBEC;border-color:#C8102E;color:#C8102E">Đang tải</button>
+    <button onClick="{{ setError }}" style="font:500 12px 'Be Vietnam Pro',sans-serif;padding:6px 12px;border-radius:8px;border:1px solid #E5E5E8;background:#FFFFFF;color:#1A1A1E;cursor:pointer" style-hover="background:#FDEBEC;border-color:#C8102E;color:#C8102E">Lỗi mạng</button>
+    <button onClick="{{ cycleBanner }}" style="font:500 12px 'Be Vietnam Pro',sans-serif;padding:6px 12px;border-radius:8px;border:1px dashed #C8102E;background:#FDEBEC;color:#C8102E;cursor:pointer">Đổi mức cảnh báo</button>
+  </div>
+
+  <div style="position:relative;width:390px;height:844px;background:#F7F7F9;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px #E5E5E8,0 18px 48px rgba(26,26,30,.18)">
+
+    <div class="scroll" style="position:absolute;inset:0;overflow-y:auto;padding-bottom:96px">
+
+      <div style="background:#FFFFFF;border-bottom:1px solid #E5E5E8;padding:0 16px">
+        <div style="display:flex;align-items:center;justify-content:space-between;height:44px;font:600 12px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">
+          <span>9:41</span>
+          <span style="display:flex;gap:5px;align-items:center">
+            <svg width="16" height="12" viewBox="0 0 24 24" fill="none" stroke="#1A1A1E" stroke-width="2.5" stroke-linecap="round"><path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8"></path></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A1A1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"></path><path d="M5 12.859a10 10 0 0 1 14 0"></path><path d="M8.5 16.429a5 5 0 0 1 7 0"></path></svg>
+            <svg width="20" height="12" viewBox="0 0 26 14" fill="none"><rect x="1" y="1" width="20" height="12" rx="3.5" stroke="#1A1A1E" stroke-opacity=".45" stroke-width="1.4"></rect><rect x="3" y="3" width="14" height="8" rx="2" fill="#1A1A1E"></rect><path d="M23 5v4a2.6 2.6 0 0 0 0-4z" fill="#1A1A1E" fill-opacity=".45"></path></svg>
+          </span>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:10px;height:56px">
+          <img src="assets/app_icon.png" alt="Rikkei Parents" style="width:34px;height:34px;flex:none;object-fit:contain;border-radius:9px;display:block">
+          <div style="flex:1;min-width:0">
+            <div style="font:700 16px/1.15 'Be Vietnam Pro',sans-serif;color:#1A1A1E;letter-spacing:-.005em">Rikkei Parents</div>
+            <div style="font:400 10.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:2px">Cổng thông tin phụ huynh</div>
+          </div>
+          <button style="position:relative;width:40px;height:40px;flex:none;border:1px solid #E5E5E8;border-radius:12px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#FDEBEC;border-color:#F3C5C5">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1A1A1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg>
+            <span style="position:absolute;top:-4px;right:-4px;min-width:19px;height:19px;box-sizing:border-box;padding:0 4px;border-radius:10px;background:#C8102E;border:1.5px solid #FFFFFF;font:700 10.5px/16px 'Be Vietnam Pro',sans-serif;color:#FFFFFF;text-align:center">3</span>
+          </button>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:18px;padding:16px 16px 0">
+        <div style="background:#FFFFFF;border:1px solid #E5E5E8;border-radius:12px;box-shadow:0 1px 2px rgba(26,26,30,.04);overflow:hidden">
+          <div style="display:flex;align-items:center;gap:13px;padding:15px 16px">
+            <div style="width:54px;height:54px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;background:#FDEBEC;border:1px solid #F3C5C5">
+              <span style="font:700 19px 'Be Vietnam Pro',sans-serif;color:#C8102E">NA</span>
+            </div>
+            <div style="flex:1;min-width:0">
+              <div style="font:400 12px 'Be Vietnam Pro',sans-serif;color:#6B6B70">Chào phụ huynh của</div>
+              <div style="font:700 19px/1.25 'Be Vietnam Pro',sans-serif;color:#1A1A1E;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:1px">Nguyễn Văn A</div>
+              <div style="display:flex;gap:6px;margin-top:7px">
+                <span style="padding:3px 8px;border-radius:6px;background:#F1F1F3;font:600 10.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70">MSV 2021600123</span>
+                <span style="padding:3px 8px;border-radius:6px;background:#F1F1F3;font:600 10.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70">K16-CNTT2</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:13px 16px 15px;border-top:1px solid #E5E5E8;background:#F7F7F9">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:9px">
+              <span style="font:600 11.5px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Lộ trình học tập</span>
+              <span style="font:700 12.5px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">12<span style="font:500 11.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70">/16 môn&nbsp;</span></span>
+            </div>
+            <div style="display:flex;gap:2px;height:9px;border-radius:4px;overflow:hidden;background:#E5E5E8">
+              <div style="width: 68.75%; background-color: #5E97A9"></div>
+              <div style="width: 6.25%; background-color: #FF002A"></div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px">
+              <div style="display:flex;flex-direction:column;gap:4px;padding:9px 10px;background:#FFFFFF;border:1px solid #E5E5E8;border-radius:10px">
+                <span style="display:flex;align-items:baseline;gap:3px">
+                  <span style="font:700 18px/1 'Be Vietnam Pro',sans-serif;color:#0F766E">11</span>
+                  <span style="font:500 10.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70">&nbsp;môn</span>
+                </span>
+                <span style="font:500 10.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70">Đã học đạt</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px;padding:9px 10px;background:#FFFFFF;border:1px solid #E5E5E8;border-radius:10px">
+                <span style="display:flex;align-items:baseline;gap:3px">
+                  <span style="font:700 18px/1 'Be Vietnam Pro',sans-serif;color:#C8102E">1</span>
+                  <span style="font:500 10.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70">&nbsp;môn</span>
+                </span>
+                <span style="font:500 10.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70">Đã trượt</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px;padding:9px 10px;background:#FFFFFF;border:1px solid #E5E5E8;border-radius:10px">
+                <span style="display:flex;align-items:baseline;gap:3px">
+                  <span style="font: 700 18px / 1 &quot;Be Vietnam Pro&quot;, sans-serif; color: rgb(26, 26, 30);">4</span>
+                  <span style="font: 500 10.5px &quot;Be Vietnam Pro&quot;, sans-serif; color: rgb(107, 107, 112);">&nbsp;môn</span>
+                </span>
+                <span style="font:500 10.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70">Chưa học</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#FFFFFF;border:1px solid #F3C5C5;border-radius:12px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;box-shadow:0 1px 2px rgba(26,26,30,.04)">
+            <div style="width:44px;height:44px;border-radius:12px;background:#FDECEC;display:flex;align-items:center;justify-content:center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D32F2F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"></path><path d="M8.5 16.429a5 5 0 0 1 7 0"></path><path d="M5 12.859a10 10 0 0 1 5.17-2.69"></path><path d="M19 12.859a10 10 0 0 0-2.007-1.523"></path><path d="M2 8.82a15 15 0 0 1 4.177-2.643"></path><path d="M22 8.82a15 15 0 0 0-11.288-3.764"></path><path d="m2 2 20 20"></path></svg>
+            </div>
+            <div style="font:600 14.5px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Không tải được dữ liệu</div>
+            <div style="font:400 12.5px/1.55 'Be Vietnam Pro',sans-serif;color:#6B6B70;max-width:250px">Thiết bị của bạn đang mất kết nối mạng. Vui lòng kiểm tra Wi-Fi hoặc 4G rồi thử lại.</div>
+            <button onClick="{{ setFull }}" style="margin-top:2px;display:flex;align-items:center;gap:7px;padding:10px 18px;border:none;border-radius:10px;background:#D32F2F;color:#FFFFFF;font:600 13px 'Be Vietnam Pro',sans-serif;cursor:pointer" style-hover="background:#B71C1C">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M8 16H3v5"></path></svg>
+              Thử lại
+            </button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <div style="background:#FFFFFF;border:1px solid #E5E5E8;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:14px">
+              <div class="sk" style="width:130px;height:15px"></div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;align-items:center;gap:12px"><div class="sk" style="flex:1;height:34px"></div><div class="sk" style="width:52px;height:34px"></div></div>
+                <div style="display:flex;align-items:center;gap:12px"><div class="sk" style="flex:1;height:34px"></div><div class="sk" style="width:52px;height:34px"></div></div>
+                <div style="display:flex;align-items:center;gap:12px"><div class="sk" style="flex:1;height:34px"></div><div class="sk" style="width:52px;height:34px"></div></div>
+              </div>
+              <div class="sk" style="width:100%;height:9px"></div>
+              <div class="sk" style="width:100%;height:9px"></div>
+              <div class="sk" style="width:100%;height:42px;border-radius:10px"></div>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #E5E5E8;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:14px">
+              <div class="sk" style="width:150px;height:15px"></div>
+              <div style="display:flex;justify-content:space-between;gap:12px">
+                <div class="sk" style="width:76px;height:96px;border-radius:12px"></div>
+                <div class="sk" style="width:76px;height:96px;border-radius:12px"></div>
+                <div class="sk" style="width:76px;height:96px;border-radius:12px"></div>
+              </div>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #E5E5E8;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px">
+              <div class="sk" style="width:120px;height:15px"></div>
+              <div class="sk" style="width:100%;height:44px;border-radius:10px"></div>
+              <div class="sk" style="width:100%;height:44px;border-radius:10px"></div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ hasData }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:18px">
+
+          <div style="background:#FFFFFF;border:1px solid #E5E5E8;border-radius:12px;box-shadow:0 1px 2px rgba(26,26,30,.04);padding:15px 16px 16px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg>
+              <span style="font:600 15px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Môn học hiện tại</span>
+              <span style="margin-left:auto;font:500 11.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70">4 môn đang học</span>
+            </div>
+            <div style="position:relative;margin-bottom:14px">
+              <button onClick="{{ toggleSubj }}" style="width:100%;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid #F3C5C5;border-radius:10px;background:#FDEBEC;text-align:left;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif" style-hover="border-color:#C8102E">
+                <div style="flex:1;min-width:0">
+                  <div style="font:600 13.5px 'Be Vietnam Pro',sans-serif;color:#1A1A1E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ subjName }}</div>
+                  <div style="font:400 11.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ subjMeta }}</div>
+                </div>
+                <span style="flex:none;padding:4px 9px;border-radius:6px;background:#FFFFFF;color:#C8102E;font:600 11px 'Be Vietnam Pro',sans-serif">Đang học</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6B70" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="m6 9 6 6 6-6"></path></svg>
+              </button>
+
+              <sc-if value="{{ subjOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:20;background:#FFFFFF;border:1px solid #E5E5E8;border-radius:12px;box-shadow:0 10px 28px rgba(26,26,30,.16);padding:6px;display:flex;flex-direction:column;gap:2px">
+                  <div style="padding:7px 10px 5px;font:600 10.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70;letter-spacing:.04em;text-transform:uppercase">Chọn môn đang học</div>
+                  <sc-for list="{{ subjects }}" as="s" hint-placeholder-count="3">
+                    <button onClick="{{ s.pick }}" style="width:100%;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:10px;border:none;border-radius:9px;background:{{ s.bg }};text-align:left;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif" style-hover="background:#FDEBEC">
+                      <div style="flex:1;min-width:0">
+                        <div style="font:600 13px 'Be Vietnam Pro',sans-serif;color:#1A1A1E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.name }}</div>
+                        <div style="font:400 11px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:2px">{{ s.meta }}</div>
+                      </div>
+                      <sc-if value="{{ s.active }}" hint-placeholder-val="{{ false }}">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M20 6 9 17l-5-5"></path></svg>
+                      </sc-if>
+                    </button>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div>
+                <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px">
+                  <span style="font:500 12.5px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Tỉ lệ chuyên cần</span>
+                  <span style="font:700 12.5px 'Be Vietnam Pro',sans-serif;color:{{ attColor }}">{{ attPct }}</span>
+                </div>
+                <div style="height:7px;border-radius:4px;background:#F1F1F3;overflow:hidden"><div style="height:100%;border-radius:4px;width:{{ attPct }};background:{{ attColor }}"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px">
+                  <span style="font:500 12.5px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Hoàn thành bài tập</span>
+                  <span style="font:700 12.5px 'Be Vietnam Pro',sans-serif;color:{{ hwColor }}">{{ hwPct }}</span>
+                </div>
+                <div style="height:7px;border-radius:4px;background:#F1F1F3;overflow:hidden"><div style="height:100%;border-radius:4px;width:{{ hwPct }};background:{{ hwColor }}"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px">
+                  <span style="font:500 12.5px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Hoàn thành E-learning</span>
+                  <span style="font:700 12.5px 'Be Vietnam Pro',sans-serif;color:{{ elColor }}">{{ elPct }}</span>
+                </div>
+                <div style="height:7px;border-radius:4px;background:#F1F1F3;overflow:hidden"><div style="height:100%;border-radius:4px;width:{{ elPct }};background:{{ elColor }}"></div></div>
+              </div>
+            </div>
+            <div style="margin-top:14px">
+              <sc-if value="{{ attGreat }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;background:#E7F5EE;border:1px solid #C4E7D6">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1B9C63" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                  <span style="font:600 12.5px/1.4 'Be Vietnam Pro',sans-serif;color:#14764B">Sinh viên chuyên cần tốt</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ attStable }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;background:#E9F0FC;border:1px solid #C7D9F7">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#2D6CDF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                  <span style="font:600 12.5px/1.4 'Be Vietnam Pro',sans-serif;color:#24559F">Chuyên cần ở mức ổn định</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ attAlert }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;background:#FDF0E4;border:1px solid #F7DAB8">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#F2994A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+                  <span style="font:600 12.5px/1.4 'Be Vietnam Pro',sans-serif;color:#B4701F">Chuyên cần ở mức báo động</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ attFail }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;background:#FDECEC;border:1px solid #F3C5C5">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#D32F2F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="m4.9 4.9 14.2 14.2"></path></svg>
+                  <span style="font:600 12.5px/1.4 'Be Vietnam Pro',sans-serif;color:#B02525">Không đủ điều kiện thi môn này</span>
+                </div>
+              </sc-if>
+            </div>
+            <button style="margin-top:12px;width:100%;height:44px;display:flex;align-items:center;justify-content:center;gap:7px;border:none;border-radius:10px;background:#C8102E;color:#FFFFFF;font:600 13.5px 'Be Vietnam Pro',sans-serif;cursor:pointer" style-hover="background:#9B0E24" style-active="background:#9B0E24">
+              Xem chi tiết môn học
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+            </button>
+          </div>
+
+          <div style="background:#FFFFFF;border:1px solid #E5E5E8;border-radius:12px;box-shadow:0 1px 2px rgba(26,26,30,.04);overflow:hidden">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 16px 12px">
+              <div style="display:flex;align-items:center;gap:8px">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>
+                <span style="font:600 15px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Kết quả học tập</span>
+              </div>
+              <a href="#" style="display:flex;align-items:center;gap:2px;font:600 12.5px 'Be Vietnam Pro',sans-serif;color:#C8102E">Xem tất cả<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></a>
+            </div>
+
+            <div style="padding:0 16px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;gap:12px;padding:11px 12px;border:1px solid #E5E5E8;border-radius:10px;background:#FFFFFF">
+                <div style="flex:1;min-width:0">
+                  <div style="font:600 13.5px 'Be Vietnam Pro',sans-serif;color:#1A1A1E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Lập trình Web</div>
+                  <div style="font:400 11.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:2px">WEB301 · 3 tín chỉ</div>
+                </div>
+                <div style="text-align:right;flex:none">
+                  <div style="font:700 19px/1 'Be Vietnam Pro',sans-serif;color:#1A1A1E">92<span style="font:500 11px 'Be Vietnam Pro',sans-serif;color:#6B6B70">/100</span></div>
+                  <span style="display:inline-block;margin-top:5px;padding:3px 8px;border-radius:6px;background:#E7F5EE;color:#1B9C63;font:600 11px 'Be Vietnam Pro',sans-serif">Xuất sắc</span>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:11px 12px;border:1px solid #E5E5E8;border-radius:10px;background:#FFFFFF">
+                <div style="flex:1;min-width:0">
+                  <div style="font:600 13.5px 'Be Vietnam Pro',sans-serif;color:#1A1A1E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Cơ sở dữ liệu</div>
+                  <div style="font:400 11.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:2px">DBS201 · 3 tín chỉ</div>
+                </div>
+                <div style="text-align:right;flex:none">
+                  <div style="font:700 19px/1 'Be Vietnam Pro',sans-serif;color:#1A1A1E">84<span style="font:500 11px 'Be Vietnam Pro',sans-serif;color:#6B6B70">/100</span></div>
+                  <span style="display:inline-block;margin-top:5px;padding:3px 8px;border-radius:6px;background:#E9F0FC;color:#2D6CDF;font:600 11px 'Be Vietnam Pro',sans-serif">Giỏi</span>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:11px 12px;border:1px solid #E5E5E8;border-radius:10px;background:#FFFFFF">
+                <div style="flex:1;min-width:0">
+                  <div style="font:600 13.5px 'Be Vietnam Pro',sans-serif;color:#1A1A1E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tiếng Nhật N4</div>
+                  <div style="font:400 11.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:2px">JPN202 · 4 tín chỉ</div>
+                </div>
+                <div style="text-align:right;flex:none">
+                  <div style="font:700 19px/1 'Be Vietnam Pro',sans-serif;color:#1A1A1E">71<span style="font:500 11px 'Be Vietnam Pro',sans-serif;color:#6B6B70">/100</span></div>
+                  <span style="display:inline-block;margin-top:5px;padding:3px 8px;border-radius:6px;background:#FDF0E4;color:#F2994A;font:600 11px 'Be Vietnam Pro',sans-serif">Khá</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding:14px 16px 16px">
+              <sc-if value="{{ bannerExcellent }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;align-items:center;gap:10px;padding:12px;border-radius:10px;background:#E7F5EE;border:1px solid #C4E7D6">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B9C63" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                  <span style="font:600 13px/1.4 'Be Vietnam Pro',sans-serif;color:#14764B">Sinh viên học tập rèn luyện tốt</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ bannerGood }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;align-items:center;gap:10px;padding:12px;border-radius:10px;background:#E9F0FC;border:1px solid #C7D9F7">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D6CDF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
+                  <span style="font:600 13px/1.4 'Be Vietnam Pro',sans-serif;color:#24559F">Học lực của sinh viên ở mức ổn định</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ bannerFair }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;align-items:center;gap:10px;padding:12px;border-radius:10px;background:#FDF0E4;border:1px solid #F7DAB8">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2994A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+                  <span style="font:600 13px/1.4 'Be Vietnam Pro',sans-serif;color:#B4701F">Báo động về tình hình học tập</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ bannerBlocked }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;align-items:center;gap:10px;padding:12px;border-radius:10px;background:#FDECEC;border:1px solid #F3C5C5">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D32F2F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="m4.9 4.9 14.2 14.2"></path></svg>
+                  <span style="font:600 13px/1.4 'Be Vietnam Pro',sans-serif;color:#B02525">Sinh viên không đủ điều kiện thi</span>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+
+          <div style="background:#FFFFFF;border:1px solid #E5E5E8;border-radius:12px;box-shadow:0 1px 2px rgba(26,26,30,.04);padding:15px 16px 16px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"></path><path d="M12 12V2"></path><path d="m12 12 8.5-5"></path></svg>
+              <span style="font:600 15px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Năng lực cốt lõi</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:9px;padding:12px 4px;border:1px solid #E5E5E8;border-radius:12px">
+                <div style="position:relative;width:64px;height:64px">
+                  <svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="none" stroke="#F1F1F3" stroke-width="7"></circle><circle cx="32" cy="32" r="26" fill="none" stroke="#1B9C63" stroke-width="7" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="29.4" transform="rotate(-90 32 32)"></circle></svg>
+                  <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 14px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">82%</span>
+                </div>
+                <span style="font:500 11.5px/1.3 'Be Vietnam Pro',sans-serif;color:#6B6B70;text-align:center">Chuyên môn</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:9px;padding:12px 4px;border:1px solid #E5E5E8;border-radius:12px">
+                <div style="position:relative;width:64px;height:64px">
+                  <svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="none" stroke="#F1F1F3" stroke-width="7"></circle><circle cx="32" cy="32" r="26" fill="none" stroke="#2D6CDF" stroke-width="7" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="52.3" transform="rotate(-90 32 32)"></circle></svg>
+                  <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 14px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">68%</span>
+                </div>
+                <span style="font:500 11.5px/1.3 'Be Vietnam Pro',sans-serif;color:#6B6B70;text-align:center">Ngoại ngữ</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:9px;padding:12px 4px;border:1px solid #E5E5E8;border-radius:12px">
+                <div style="position:relative;width:64px;height:64px">
+                  <svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="none" stroke="#F1F1F3" stroke-width="7"></circle><circle cx="32" cy="32" r="26" fill="none" stroke="#F2994A" stroke-width="7" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="40.8" transform="rotate(-90 32 32)"></circle></svg>
+                  <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 14px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">75%</span>
+                </div>
+                <span style="font:500 11.5px/1.3 'Be Vietnam Pro',sans-serif;color:#6B6B70;text-align:center">Kỹ năng mềm</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <div style="background:#FFFFFF;border:1px solid #E5E5E8;border-radius:12px;box-shadow:0 1px 2px rgba(26,26,30,.04);padding:15px 16px 22px">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>
+                <span style="font:600 15px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Kết quả học tập</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px">
+                <div style="width:56px;height:56px;border-radius:16px;background:#F1F1F3;display:flex;align-items:center;justify-content:center">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6B6B70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg>
+                </div>
+                <div style="font:600 14px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Chưa có điểm trong kỳ này</div>
+                <div style="font:400 12.5px/1.55 'Be Vietnam Pro',sans-serif;color:#6B6B70;max-width:245px">Học kỳ mới vừa bắt đầu. Điểm các môn sẽ xuất hiện tại đây ngay khi nhà trường cập nhật.</div>
+              </div>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #E5E5E8;border-radius:12px;box-shadow:0 1px 2px rgba(26,26,30,.04);padding:15px 16px 22px">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"></path><path d="M12 12V2"></path><path d="m12 12 8.5-5"></path></svg>
+                <span style="font:600 15px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Năng lực cốt lõi</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px">
+                <div style="width:56px;height:56px;border-radius:16px;background:#F1F1F3;display:flex;align-items:center;justify-content:center">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6B6B70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"></path><path d="M12 12V2"></path></svg>
+                </div>
+                <div style="font:600 14px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Chưa có đánh giá năng lực</div>
+                <div style="font:400 12.5px/1.55 'Be Vietnam Pro',sans-serif;color:#6B6B70;max-width:245px">Nhà trường đánh giá năng lực vào giữa và cuối học kỳ.</div>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="background:#FFFFFF;border:1px solid #E5E5E8;border-radius:12px;box-shadow:0 1px 2px rgba(26,26,30,.04);padding:15px 16px 16px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21a8 8 0 0 1 13.292-6"></path><circle cx="10" cy="8" r="5"></circle><path d="m16 19 2 2 4-4"></path></svg>
+            <span style="font:600 15px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Điểm danh hôm nay</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:13px;border-radius:10px;background:#E7F5EE;border:1px solid #C4E7D6">
+            <div style="width:38px;height:38px;border-radius:10px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1B9C63" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            </div>
+            <div style="flex:1">
+              <div style="font:700 14px 'Be Vietnam Pro',sans-serif;color:#14764B">Có mặt</div>
+              <div style="font:400 12px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:2px">Thứ Năm, 13/08 · Vào lớp 07:26</div>
+            </div>
+            <span style="padding:4px 9px;border-radius:6px;background:#FFFFFF;color:#1B9C63;font:600 11px 'Be Vietnam Pro',sans-serif;flex:none">4/4 tiết</span>
+          </div>
+        </div>
+
+        <div style="background:#FFFFFF;border:1px solid #E5E5E8;border-radius:12px;box-shadow:0 1px 2px rgba(26,26,30,.04);padding:15px 16px 16px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path></svg>
+              <span style="font:600 15px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Thời khóa biểu hôm nay</span>
+            </div>
+            <a href="#" style="display:flex;align-items:center;gap:2px;font:600 12.5px 'Be Vietnam Pro',sans-serif;color:#C8102E">Xem đầy đủ<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:10px;background:#FDEBEC">
+              <div style="width:3px;height:34px;border-radius:2px;background:#C8102E;flex:none"></div>
+              <div style="flex:none;width:70px">
+                <div style="font:700 13px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">07:30</div>
+                <div style="font:400 11px 'Be Vietnam Pro',sans-serif;color:#6B6B70">09:00</div>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div style="font:600 13.5px 'Be Vietnam Pro',sans-serif;color:#1A1A1E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Lập trình Web</div>
+                <div style="font:400 11.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:1px">P.402 · TS. Trần Minh</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:10px;background:#F7F7F9">
+              <div style="width:3px;height:34px;border-radius:2px;background:#E5E5E8;flex:none"></div>
+              <div style="flex:none;width:70px">
+                <div style="font:700 13px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">09:15</div>
+                <div style="font:400 11px 'Be Vietnam Pro',sans-serif;color:#6B6B70">10:45</div>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div style="font:600 13.5px 'Be Vietnam Pro',sans-serif;color:#1A1A1E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Cơ sở dữ liệu</div>
+                <div style="font:400 11.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:1px">P.402 · ThS. Lê Hoài</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:10px;background:#F7F7F9">
+              <div style="width:3px;height:34px;border-radius:2px;background:#E5E5E8;flex:none"></div>
+              <div style="flex:none;width:70px">
+                <div style="font:700 13px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">13:00</div>
+                <div style="font:400 11px 'Be Vietnam Pro',sans-serif;color:#6B6B70">14:30</div>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div style="font:600 13.5px 'Be Vietnam Pro',sans-serif;color:#1A1A1E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tiếng Nhật N4</div>
+                <div style="font:400 11.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:1px">P.201 · CN. Yamada</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:10px;background:#F7F7F9">
+              <div style="width:3px;height:34px;border-radius:2px;background:#E5E5E8;flex:none"></div>
+              <div style="flex:none;width:70px">
+                <div style="font:700 13px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">14:45</div>
+                <div style="font:400 11px 'Be Vietnam Pro',sans-serif;color:#6B6B70">16:15</div>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div style="font:600 13.5px 'Be Vietnam Pro',sans-serif;color:#1A1A1E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Kỹ năng mềm</div>
+                <div style="font:400 11.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:1px">Hội trường A · ThS. Vũ Hà</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:#FFFFFF;border:1px solid #E5E5E8;border-radius:12px;box-shadow:0 1px 2px rgba(26,26,30,.04);padding:15px 16px 16px;margin-bottom:14px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg>
+              <span style="font:600 15px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Thông báo từ trường</span>
+            </div>
+            <a href="#" style="display:flex;align-items:center;gap:2px;font:600 12.5px 'Be Vietnam Pro',sans-serif;color:#C8102E">Xem tất cả<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></a>
+          </div>
+
+          <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:8px 0 12px">
+              <div style="width:56px;height:56px;border-radius:16px;background:#F1F1F3;display:flex;align-items:center;justify-content:center">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6B6B70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg>
+              </div>
+              <div style="font:600 14px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Chưa có thông báo mới</div>
+              <div style="font:400 12.5px/1.55 'Be Vietnam Pro',sans-serif;color:#6B6B70;max-width:245px">Mọi thông báo từ nhà trường sẽ được gửi tới đây.</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ hasData }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;gap:11px;padding:12px;border:1px solid #E5E5E8;border-radius:10px;cursor:pointer" style-hover="background:#FDEBEC;border-color:#F3C5C5">
+              <span style="width:7px;height:7px;border-radius:50%;background:#C8102E;flex:none;margin-top:6px"></span>
+              <div style="flex:1;min-width:0">
+                <div style="font:600 13.5px/1.4 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Thông báo lịch thi cuối kỳ học kỳ 2</div>
+                <div style="font:400 12px/1.5 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Nhà trường thông báo lịch thi cuối kỳ bắt đầu từ ngày 25/08. Phụ huynh vui lòng nhắc sinh viên hoàn thành học phí trước ngày 20/08.</div>
+                <div style="font:500 11px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:6px">2 giờ trước</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:11px;padding:12px;border:1px solid #E5E5E8;border-radius:10px;cursor:pointer" style-hover="background:#FDEBEC;border-color:#F3C5C5">
+              <span style="width:7px;height:7px;border-radius:50%;background:#E5E5E8;flex:none;margin-top:6px"></span>
+              <div style="flex:1;min-width:0">
+                <div style="font:600 13.5px/1.4 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Họp phụ huynh giữa học kỳ</div>
+                <div style="font:400 12px/1.5 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Buổi họp phụ huynh lớp K16-CNTT2 diễn ra 08:30 Chủ Nhật 17/08 tại Hội trường A, trao đổi về kết quả học tập giữa kỳ.</div>
+                <div style="font:500 11px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:6px">Hôm qua, 16:10</div>
+              </div>
+            </div>
+          </div>
+          </sc-if>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="position:absolute;left:0;right:0;bottom:0;background:#FFFFFF;border-top:1px solid #E5E5E8;padding:8px 2px 20px;display:grid;grid-template-columns:repeat(5,1fr)">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0;cursor:pointer;min-height:44px;box-sizing:border-box">
+        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+        <span style="font:600 10.5px 'Be Vietnam Pro',sans-serif;color:#C8102E">Trang chủ</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0;cursor:pointer;min-height:44px;box-sizing:border-box">
+        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#6B6B70" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>
+        <span style="font:500 10.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70">Học tập</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0;cursor:pointer;min-height:44px;box-sizing:border-box">
+        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#6B6B70" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path></svg>
+        <span style="font:500 10.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70">Thời khóa biểu</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0;cursor:pointer;min-height:44px;box-sizing:border-box;position:relative">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6B6B70" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg>
+        <span style="font:500 9.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70">Thông báo</span>
+        <span style="position:absolute;top:4px;left:calc(50% + 7px);min-width:17px;height:17px;box-sizing:border-box;padding:0 4px;border-radius:9px;background:#C8102E;border:1.5px solid #FFFFFF;font:700 9.5px/14px 'Be Vietnam Pro',sans-serif;color:#FFFFFF;text-align:center">3</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0;cursor:pointer;min-height:44px;box-sizing:border-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6B6B70" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="10" r="3"></circle><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path></svg>
+        <span style="font:500 9.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70">Cá nhân</span>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:440,&quot;height&quot;:1000},&quot;viewState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;full&quot;,&quot;empty&quot;,&quot;loading&quot;,&quot;error&quot;],&quot;default&quot;:&quot;full&quot;,&quot;tsType&quot;:&quot;'full'|'empty'|'loading'|'error'&quot;,&quot;section&quot;:&quot;Trạng thái&quot;},&quot;bannerLevel&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;excellent&quot;,&quot;good&quot;,&quot;fair&quot;,&quot;blocked&quot;],&quot;default&quot;:&quot;excellent&quot;,&quot;tsType&quot;:&quot;'excellent'|'good'|'fair'|'blocked'&quot;,&quot;section&quot;:&quot;Trạng thái&quot;}}">
+class Component extends DCLogic {
+  state = { view: null, banner: null, subjIndex: 0, subjOpen: false };
+  SUBJECTS = [
+    { name: 'Lập trình Web', meta: 'WEB301 · Tuần 8/15 · TS. Trần Minh', att: 94, hw: 88, el: 63 },
+    { name: 'Cơ sở dữ liệu', meta: 'DBS201 · Tuần 8/15 · ThS. Lê Hoài', att: 88, hw: 76, el: 81 },
+    { name: 'Tiếng Nhật N4', meta: 'JPN202 · Tuần 6/15 · CN. Yamada', att: 72, hw: 64, el: 45 },
+    { name: 'Giải tích 2', meta: 'MAT202 · Tuần 8/15 · TS. Phạm Anh', att: 54, hw: 40, el: 22 }
+  ];
+  get view() { return this.state.view ?? this.props.viewState ?? 'full'; }
+  get banner() { return this.state.banner ?? this.props.bannerLevel ?? 'excellent'; }
+  rateColor(v) { return v < 80 ? '#C8102E' : v >= 90 ? '#1B9C63' : '#2D6CDF'; }
+  renderVals() {
+    const v = this.view, b = this.banner;
+    const order = ['excellent', 'good', 'fair', 'blocked'];
+    const i = this.state.subjIndex, cur = this.SUBJECTS[i];
+    return {
+      subjOpen: this.state.subjOpen,
+      subjName: cur.name,
+      subjMeta: cur.meta,
+      attPct: cur.att + '%',
+      hwPct: cur.hw + '%',
+      elPct: cur.el + '%',
+      attColor: this.rateColor(cur.att),
+      hwColor: this.rateColor(cur.hw),
+      elColor: this.rateColor(cur.el),
+      attGreat: cur.att >= 90,
+      attStable: cur.att >= 75 && cur.att < 90,
+      attAlert: cur.att >= 60 && cur.att < 75,
+      attFail: cur.att < 60,
+      toggleSubj: () => this.setState(s => ({ subjOpen: !s.subjOpen })),
+      subjects: this.SUBJECTS.map((s, n) => ({
+        name: s.name, meta: s.meta, active: n === i,
+        bg: n === i ? '#FDEBEC' : '#FFFFFF',
+        pick: () => this.setState({ subjIndex: n, subjOpen: false })
+      })),
+      isLoading: v === 'loading',
+      isError: v === 'error',
+      isEmpty: v === 'empty',
+      hasData: v === 'full',
+      bannerExcellent: b === 'excellent',
+      bannerGood: b === 'good',
+      bannerFair: b === 'fair',
+      bannerBlocked: b === 'blocked',
+      setFull: () => this.setState({ view: 'full' }),
+      setEmpty: () => this.setState({ view: 'empty' }),
+      setLoading: () => this.setState({ view: 'loading' }),
+      setError: () => this.setState({ view: 'error' }),
+      cycleBanner: () => this.setState({ view: 'full', banner: order[(order.indexOf(b) + 1) % 4] })
+    };
+  }
+}
+</script>
+</body>
+</html>

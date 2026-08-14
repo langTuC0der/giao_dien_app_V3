@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EDEDF0;font-family:'Be Vietnam Pro',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#C8102E;text-decoration:none}a:hover{color:#9B0E24}
+.pf div[style*="430px"]{display:none !important}
+.pf > div > div{padding:0 !important;gap:0 !important;min-height:0 !important}
+.ob > div > div{padding:0 !important;background:transparent !important}
+</style>
+</helmet>
+<div style="display:flex;flex-direction:column;gap:56px;padding:44px 48px 72px;background:#EDEDF0;box-sizing:border-box">
+
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;border-bottom:2px solid #C8102E;padding-bottom:18px">
+    <div>
+      <div style="font:700 34px/1.1 'Be Vietnam Pro',sans-serif;color:#1A1A1E;letter-spacing:-.015em">Rikkei Parents · Bản thiết kế cuối</div>
+      <div style="font:400 15px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-top:8px">Ứng dụng phụ huynh · toàn bộ luồng: trước đăng nhập (9 màn) và sau đăng nhập (10 màn) · cập nhật 13/08/2026</div>
+    </div>
+    <div style="display:flex;gap:8px;flex:none">
+      <span style="padding:6px 11px;border-radius:8px;background:#FFFFFF;border:1px solid #E5E5E8;font:600 12px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">iPhone 390 × 844</span>
+      <span style="padding:6px 11px;border-radius:8px;background:#FDEBEC;border:1px solid #F3C5C5;font:600 12px 'Be Vietnam Pro',sans-serif;color:#C8102E">shadcn/ui · Be Vietnam Pro</span>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <span style="width:30px;height:30px;flex:none;border-radius:9px;background:#1A1A1E;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:700 14px 'Be Vietnam Pro',sans-serif">A</span>
+      <span style="font:700 22px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Trước đăng nhập</span>
+      <span style="font:400 13px 'Be Vietnam Pro',sans-serif;color:#6B6B70">Splash → Onboarding → Đăng nhập → Quên mật khẩu → OTP → Đặt lại mật khẩu</span>
+      <span style="flex:1;height:1px;background:#DCDCE0"></span>
+    </div>
+    <div class="ob"><dc-import name="Onboarding va Dang nhap - Rikkei Parents" hint-size="100%,1000px"></dc-import></div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <span style="width:30px;height:30px;flex:none;border-radius:9px;background:#C8102E;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:700 14px 'Be Vietnam Pro',sans-serif">B</span>
+      <span style="font:700 22px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Sau đăng nhập</span>
+      <span style="font:400 13px 'Be Vietnam Pro',sans-serif;color:#6B6B70">5 tab cấp 1 + 5 màn con (drill-down có nút back)</span>
+      <span style="flex:1;height:1px;background:#DCDCE0"></span>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:34px">
+      <sc-for list="{{ screens }}" as="s" hint-placeholder-count="10">
+        <div style="display:flex;flex-direction:column;gap:11px" data-screen-label="{{ s.label }}">
+          <div style="display:flex;align-items:center;gap:8px;width:390px">
+            <span style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1A1A1E;color:#FFFFFF;border-radius:5px;flex:none">{{ s.num }}</span>
+            <span style="font:600 13px 'Be Vietnam Pro',sans-serif;color:#1A1A1E;flex:none">{{ s.title }}</span>
+            <span style="font:400 11.5px 'Be Vietnam Pro',sans-serif;color:#6B6B70;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.note }}</span>
+          </div>
+          <div class="pf" style="width:390px;height:844px;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px #E5E5E8,0 18px 48px rgba(26,26,30,.18);background:#F7F7F9">
+            <dc-import name="Cac man sau dang nhap - Rikkei Parents" screen="{{ s.key }}" hint-size="390px,844px"></dc-import>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:14px;background:#FFFFFF;border:1px solid #E5E5E8;border-radius:14px;padding:22px 24px">
+    <span style="font:700 16px 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Quy ước thiết kế</span>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px">
+      <div>
+        <div style="font:600 12px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-bottom:8px">Màu chính</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="display:flex;align-items:center;gap:8px;font:500 12px 'Be Vietnam Pro',sans-serif;color:#1A1A1E"><span style="width:16px;height:16px;border-radius:5px;background:#C8102E;flex:none"></span>primary #C8102E</span>
+          <span style="display:flex;align-items:center;gap:8px;font:500 12px 'Be Vietnam Pro',sans-serif;color:#1A1A1E"><span style="width:16px;height:16px;border-radius:5px;background:#FDEBEC;border:1px solid #F3C5C5;flex:none"></span>accent #FDEBEC</span>
+          <span style="display:flex;align-items:center;gap:8px;font:500 12px 'Be Vietnam Pro',sans-serif;color:#1A1A1E"><span style="width:16px;height:16px;border-radius:5px;background:#1A1A1E;flex:none"></span>foreground #1A1A1E</span>
+        </div>
+      </div>
+      <div>
+        <div style="font:600 12px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-bottom:8px">Trạng thái</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="display:flex;align-items:center;gap:8px;font:500 12px 'Be Vietnam Pro',sans-serif;color:#1A1A1E"><span style="width:16px;height:16px;border-radius:5px;background:#1B9C63;flex:none"></span>Xuất sắc / Có mặt</span>
+          <span style="display:flex;align-items:center;gap:8px;font:500 12px 'Be Vietnam Pro',sans-serif;color:#1A1A1E"><span style="width:16px;height:16px;border-radius:5px;background:#2D6CDF;flex:none"></span>Giỏi / ổn định</span>
+          <span style="display:flex;align-items:center;gap:8px;font:500 12px 'Be Vietnam Pro',sans-serif;color:#1A1A1E"><span style="width:16px;height:16px;border-radius:5px;background:#F2994A;flex:none"></span>Khá / đi muộn</span>
+          <span style="display:flex;align-items:center;gap:8px;font:500 12px 'Be Vietnam Pro',sans-serif;color:#1A1A1E"><span style="width:16px;height:16px;border-radius:5px;background:#D32F2F;flex:none"></span>Yếu / vắng / lỗi</span>
+        </div>
+      </div>
+      <div>
+        <div style="font:600 12px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-bottom:8px">Ngưỡng cảnh báo</div>
+        <div style="font:400 12px/1.7 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Chuyên cần ≥ 90% tốt · 75–89% ổn định · 60–74% báo động · &lt; 60% không đủ ĐK thi. Điểm ≥ 90 Xuất sắc · 80–89 Giỏi · 65–79 Khá · &lt; 65 Yếu (không đạt).</div>
+      </div>
+      <div>
+        <div style="font:600 12px 'Be Vietnam Pro',sans-serif;color:#6B6B70;margin-bottom:8px">Điều hướng</div>
+        <div style="font:400 12px/1.7 'Be Vietnam Pro',sans-serif;color:#1A1A1E">Tab bar 5 mục cố định (Trang chủ · Học tập · Thời khóa biểu · Thông báo · Cá nhân). Màn con dùng nút back, không có tab bar. App bar logo + bell hiện ở mọi màn cấp 1.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:2400,&quot;height&quot;:2200}}">
+class Component extends DCLogic {
+  SCREENS = [
+    ['home', 'Trang chủ', 'tab 1 · tổng quan con'],
+    ['courses', 'Học tập', 'tab 2 · tóm tắt + cảnh báo'],
+    ['learning', 'Môn đang học', 'màn con · xếp theo tên môn'],
+    ['results', 'Kết quả môn đã học', 'màn con · lọc theo học kỳ'],
+    ['courseDetail', 'Chi tiết môn học', 'màn con · đầu điểm + biểu đồ'],
+    ['schedule', 'Thời khóa biểu', 'tab 3 · timeline theo ngày'],
+    ['notis', 'Thông báo', 'tab 4 · danh sách mới nhất'],
+    ['notiDetail', 'Chi tiết thông báo', 'màn con · nội dung + tệp'],
+    ['profile', 'Cá nhân', 'tab 5 · thông tin + menu'],
+    ['password', 'Đổi mật khẩu', 'màn con · form + toast']
+  ];
+  renderVals() {
+    return {
+      screens: this.SCREENS.map(([key, title, note], i) => ({
+        key, title, note,
+        num: String(i + 1).padStart(2, '0'),
+        label: String(i + 1).padStart(2, '0') + ' ' + title
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
